@@ -1,0 +1,104 @@
+<div class="home-container">
+    <ejs-toolbar>
+      <e-items>
+        <e-item text="Home"></e-item>
+        <e-item text="Employees"></e-item>
+        <e-item text="Settings"></e-item>
+      </e-items>
+    </ejs-toolbar>
+  
+    <div class="button-container">
+      <button ejs-button cssClass="e-success" (click)="openDialog(null)">Add New Employee</button>
+    </div>
+  
+    <div class="search-container">
+      <ejs-textbox placeholder="Search" [(ngModel)]="searchText" (input)="onSearch()"></ejs-textbox>
+    </div>
+  
+    <div class="table-container">
+      <ejs-grid
+        [dataSource]="filteredEmployees"
+        [allowPaging]="true"
+        [pageSettings]="{ pageSize: 5 }"
+        (recordDoubleClick)="openDialog($event.rowData)"
+      >
+        <e-columns>
+          <e-column field="firstName" headerText="First Name" width="100"></e-column>
+          <e-column field="lastName" headerText="Last Name" width="100"></e-column>
+          <e-column field="gender" headerText="Gender" width="100"></e-column>
+          <e-column field="phone" headerText="Phone" width="120"></e-column>
+          <e-column field="department" headerText="Department" width="100"></e-column>
+          <e-column field="payRate" headerText="Pay Rate" width="100"></e-column>
+          <e-column field="jobTitle" headerText="Job Title" width="120"></e-column>
+          <e-column field="hireDate" headerText="Hire Date" width="120" format="yMd"></e-column>
+          <e-column headerText="Actions" width="200">
+            <ng-template #template let-data>
+              <button ejs-button cssClass="e-info" (click)="openDialog(data)">Edit</button>&nbsp;&nbsp;
+              <button ejs-button cssClass="e-danger" (click)="deleteEmployee(data)">Delete</button>
+            </ng-template>
+          </e-column>
+        </e-columns>
+      </ejs-grid>
+    </div>
+  
+    <ejs-dialog
+      #dialog
+      header="Employee Information"
+      [(visible)]="dialogVisible"
+      width="800px"
+      class="custom-dialog"
+      [isModal]="true"
+      [buttons]="dialogButtons"
+    >
+      <ng-template #header>
+        <div style="display: flex; justify-content: space-between; align-items: center;">
+          <span>Employee Information</span>
+          <button ejs-button class="close-button" (click)="closeDialog()">CLOSE</button>
+        </div>
+      </ng-template>
+      <ng-template #content>
+        <div class="dialog-content">
+          <div class="dialog-row">
+            <div class="dialog-column">
+              <label><b>First Name</b></label>
+              <ejs-textbox placeholder="First Name" [(ngModel)]="selectedEmployee.firstName"></ejs-textbox>
+            </div>
+            <div class="dialog-column">
+              <label><b>Last Name</b></label>
+              <ejs-textbox placeholder="Last Name" [(ngModel)]="selectedEmployee.lastName"></ejs-textbox>
+            </div>
+          </div>
+          <div class="dialog-row">
+            <div class="dialog-column">
+              <label><b>Gender</b></label>
+              <ejs-dropdownlist [dataSource]="genderData" placeholder="Gender" [(ngModel)]="selectedEmployee.gender"></ejs-dropdownlist>
+            </div>
+            <div class="dialog-column">
+              <label><b>Phone</b></label>
+              <ejs-textbox placeholder="Phone" [(ngModel)]="selectedEmployee.phone"></ejs-textbox>
+            </div>
+          </div>
+          <div class="dialog-row">
+            <div class="dialog-column">
+              <label><b>Department</b></label>
+              <ejs-textbox placeholder="Department" [(ngModel)]="selectedEmployee.department"></ejs-textbox>
+            </div>
+            <div class="dialog-column">
+              <label><b>Pay Rate</b></label>
+              <ejs-textbox placeholder="Pay Rate" [(ngModel)]="selectedEmployee.payRate"></ejs-textbox>
+            </div>
+          </div>
+          <div class="dialog-row">
+            <div class="dialog-column">
+              <label><b>Job Title</b></label>
+              <ejs-textbox placeholder="Job Title" [(ngModel)]="selectedEmployee.jobTitle"></ejs-textbox>
+            </div>
+            <div class="dialog-column">
+              <label><b>Hire Date</b></label>
+              <ejs-datepicker placeholder="Hire Date" [(ngModel)]="selectedEmployee.hireDate"></ejs-datepicker>
+            </div>
+          </div>
+        </div>
+      </ng-template>
+    </ejs-dialog>
+  </div>

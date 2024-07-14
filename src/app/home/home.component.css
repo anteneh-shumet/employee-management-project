@@ -1,0 +1,49 @@
+.home-container {
+  padding: 20px;
+}
+
+.button-container {
+  float: right;
+  margin-bottom: 20px;
+}
+
+.search-container {
+  margin-bottom: 20px;
+}
+
+.table-container {
+  margin-top: 20px;
+}
+
+.e-dialog .e-dialog-content {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.e-dialog .e-dialog-content > div {
+  margin-bottom: 10px;
+}
+.dialog-row {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 10px;
+}
+.dialog-column label {
+  font-weight: bold;
+}
+.close-button {
+  cursor: pointer !important;
+  float: right !important;
+}
+.date-picker-container .e-input-group {
+  width: 100%;
+}
+.dialog-column {
+  flex: 1;
+  margin-right: 10px;
+}
+.custom-dialog {
+  max-height: 80vh !important; /* Set a maximum height to prevent the dialog from occupying too much space */
+  overflow-y: auto; /* Enable vertical scrolling if content exceeds the max height */
+}
